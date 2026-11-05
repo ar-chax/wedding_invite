@@ -253,163 +253,41 @@
         </p>
       </section>
 
-      <!-- ================= SLIDE 2: THE COUPLE ================= -->
-      <section id="slide-1" class="slide-pane hidden text-center flex flex-col items-center">
-        <!-- Couple Portrait Arch -->
-    <div class="couple-arch-container mb-3">
-      <img 
-        src="Image (4).jpg" 
-        alt="Arnav & Shaheli" 
-        class="couple-image-blend"
-        onerror="this.style.display='none';"
-      />
-    </div>
-        <p class="text-[11px] sm:text-xs tracking-[0.25em] text-amber-300 uppercase font-sans">The Auspicious Union</p>
+<!-- SLIDE 2: THE COUPLE -->
+      <section id="slide-1" class="slide-pane hidden text-center flex flex-col items-center justify-center h-full min-h-[460px] py-4">
+        
+        <!-- Framed Couple Portrait -->
+        <div class="relative w-44 h-56 sm:w-52 sm:h-68 rounded-t-full rounded-b-2xl overflow-hidden border-2 border-amber-300/80 shadow-[0_0_25px_rgba(245,208,97,0.35)] bg-gradient-to-b from-amber-950/40 via-red-950/60 to-black/80 flex items-center justify-center mb-4 transition-transform duration-500 hover:scale-[1.02]">
+          <img 
+            src="Image (4).jpg" 
+            alt="Arnav & Shaheli" 
+            class="w-full h-full object-cover object-top"
+          />
+        </div>
+
+        <!-- Subheading -->
+        <p class="text-[11px] sm:text-xs tracking-[0.25em] text-amber-300 uppercase font-sans mb-1">The Auspicious Union</p>
 
         <!-- Groom & Bride Names -->
-        <div class="my-2 py-1 w-full bg-gradient-to-r from-transparent via-red-950/60 to-transparent border-y border-amber-500/30">
-          <h2 class="font-cinzel text-2xl sm:text-3xl font-extrabold gold-gradient-text tracking-wide">
-            ARNAV <span class="font-script text-xl sm:text-2xl text-amber-200 lowercase">&amp;</span> SHAHELI
-          </h2>
+        <h2 class="font-serif text-2xl sm:text-3xl text-amber-200 font-bold tracking-wide mb-3">
+          ARNAV <span class="font-normal font-sans text-amber-400 text-lg">&amp;</span> SHAHELI
+        </h2>
+
+        <!-- Traditional Divider Motif -->
+        <div class="flex items-center justify-center gap-2 text-amber-400/70 mb-3 text-xs">
+          <span>❖</span>
+          <span class="w-12 h-px bg-gradient-to-r from-transparent via-amber-400/60 to-transparent"></span>
+          <span>✦</span>
+          <span class="w-12 h-px bg-gradient-to-r from-transparent via-amber-400/60 to-transparent"></span>
+          <span>❖</span>
         </div>
 
-        <!-- 2D Blended Couple Portrait inside Royal Jharokha Arch -->
-        <div class="couple-arch-container my-2 flex items-center justify-center relative group">
-          <!-- Marigold floral garland arch overlay -->
-          <div class="absolute top-0 inset-x-0 h-6 flex justify-around items-center px-4 z-10 pointer-events-none opacity-85">
-            <span class="text-sm">🌼</span><span class="text-xs">🌸</span><span class="text-sm">🌼</span><span class="text-xs">🌸</span><span class="text-sm">🌼</span>
-          </div>
-
-          <!-- Stylized 2D Dancing Vector Silhouette blended into the theme -->
-          <div id="coupleGraphicWrapper" class="w-full h-full flex items-center justify-center relative">
-            <svg id="coupleVectorSvg" class="w-full h-full p-2" viewBox="0 0 300 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <!-- Warm Golden Foil Gradient for the couple -->
-                <linearGradient id="goldDressGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#fff4cf" />
-                  <stop offset="40%" stop-color="#f8d374" />
-                  <stop offset="75%" stop-color="#d49e29" />
-                  <stop offset="100%" stop-color="#996c0d" />
-                </linearGradient>
-                <linearGradient id="suitGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="#eed8b3" />
-                  <stop offset="100%" stop-color="#a88c63" />
-                </linearGradient>
-                <radialGradient id="twirlGlow" cx="55%" cy="60%" r="50%">
-                  <stop offset="0%" stop-color="rgba(245, 208, 97, 0.4)" />
-                  <stop offset="100%" stop-color="transparent" />
-                </radialGradient>
-              </defs>
-
-              <!-- Ambient Glow behind dancing couple -->
-              <circle cx="160" cy="150" r="90" fill="url(#twirlGlow)"/>
-
-              <!-- Sparkles around the twirl -->
-              <circle cx="95" cy="70" r="2" fill="#fff" opacity="0.8"/>
-              <circle cx="210" cy="85" r="2.5" fill="#fce49d" opacity="0.9"/>
-              <circle cx="230" cy="180" r="1.8" fill="#f5d061" opacity="0.7"/>
-              <circle cx="75" cy="190" r="2" fill="#f5d061" opacity="0.7"/>
-
-              <!-- GROOM (Arnav): Standing on left in beige suit, holding bride's hand high -->
-              <g id="groomPose">
-                <!-- Head & Hair -->
-                <circle cx="112" cy="82" r="13" fill="#6a3512"/>
-                <circle cx="114" cy="84" r="10.5" fill="#f3c99f"/>
-                <!-- Hair texture -->
-                <path d="M102 80 C103 70 120 68 124 76 C125 80 121 84 121 84" fill="#42200b"/>
-                <!-- Spectacles -->
-                <rect x="111" y="80" width="6" height="4" rx="1.5" stroke="#42200b" stroke-width="1.2" fill="none"/>
-                <!-- Suit Jacket & Torso -->
-                <path d="M96 98 L114 96 L130 102 L132 158 L94 158 Z" fill="url(#suitGrad)"/>
-                <!-- Inner Navy shirt collar -->
-                <path d="M110 97 L115 116 L120 97 Z" fill="#1b2a47"/>
-                <!-- Suit Trousers -->
-                <path d="M96 158 L111 158 L110 248 L93 248 Z" fill="#bfa37b"/>
-                <path d="M113 158 L130 158 L132 248 L115 248 Z" fill="#a88e68"/>
-                <!-- Shoes -->
-                <ellipse cx="101" cy="250" rx="9" ry="4" fill="#1b120c"/>
-                <ellipse cx="124" cy="250" rx="9" ry="4" fill="#1b120c"/>
-                <!-- Right Raised Arm holding bride's hand -->
-                <path d="M125 104 L154 62 L163 67 L132 114 Z" fill="url(#suitGrad)"/>
-                <circle cx="158" cy="62" r="5" fill="#e8ba8c"/>
-              </g>
-
-              <!-- BRIDE (Shaheli): Twirling in shimmering ruffled lehenga -->
-              <g id="bridePose">
-                <!-- Raised Left Arm joining groom's hand high -->
-                <path d="M184 102 L162 64 L156 68 L177 107 Z" fill="#f3c99f"/>
-                <!-- Bangles on raised wrist -->
-                <circle cx="163" cy="73" r="3.5" stroke="#f5d061" stroke-width="1.5" fill="none"/>
-                <!-- Head & Flowing Hair -->
-                <!-- Hair flowing behind in motion -->
-                <path d="M180 84 Q210 95 218 128 Q202 120 186 98 Z" fill="#2d1607"/>
-                <circle cx="180" cy="85" r="10" fill="#f3c99f"/>
-                <path d="M172 82 C175 73 189 74 191 82 C192 88 186 90 186 90" fill="#2d1607"/>
-                <!-- Glasses -->
-                <rect x="174" y="82" width="6" height="4" rx="1.5" stroke="#8a531b" stroke-width="1" fill="none"/>
-                <!-- Blouse / Choli -->
-                <path d="M172 96 C176 94 186 94 191 97 L190 124 C185 125 177 125 171 123 Z" fill="url(#goldDressGrad)"/>
-                <!-- Flowing Dupatta drape -->
-                <path d="M170 102 Q156 128 152 165 Q164 158 174 125 Z" fill="rgba(255, 237, 184, 0.7)"/>
-
-                <!-- Wide Twirling Ruffled Ghagra / Skirt (Iconic Flared Motion) -->
-                <!-- Base flare -->
-                <path d="M172 124 C182 124 188 124 190 124 Q240 178 258 226 Q185 242 124 220 Q150 170 172 124 Z" fill="url(#goldDressGrad)" stroke="#c49021" stroke-width="1"/>
-                <!-- Tiered Ruffle Flounce Curves -->
-                <path d="M136 205 Q190 220 248 212" stroke="#fff1bd" stroke-width="2.5" fill="none" opacity="0.85"/>
-                <path d="M128 216 Q188 232 254 220" stroke="#ffd97d" stroke-width="3" fill="none" opacity="0.95"/>
-                <path d="M124 224 Q186 244 258 226" stroke="#996a0b" stroke-width="2" fill="none"/>
-
-                <!-- Golden Embroidered Shimmer detailing on skirt -->
-                <path d="M160 148 Q182 176 195 210" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" stroke-dasharray="3,3" fill="none"/>
-                <path d="M182 144 Q204 172 222 204" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" stroke-dasharray="3,3" fill="none"/>
-              </g>
-
-              <!-- Joining of Hands Clasp -->
-              <circle cx="160" cy="65" r="4.5" fill="#fbe39e" stroke="#c99726" stroke-width="1"/>
-              <!-- Blessing petals at feet -->
-              <ellipse cx="188" cy="242" rx="6" ry="2" fill="#ff7f00" opacity="0.85"/>
-              <ellipse cx="140" cy="238" rx="5" ry="2.2" fill="#e63946" opacity="0.85"/>
-              <ellipse cx="216" cy="236" rx="6" ry="2.5" fill="#ffd700" opacity="0.85"/>
-            </svg>
-
-            <!-- Dynamic Image Overlay: Displays cut-out if provided -->
-            <img id="customCouplePhoto" class="couple-image-blend hidden absolute inset-0 w-full h-full" alt="Arnav & Shaheli">
-          </div>
-
-          <!-- Bottom Soft Gradient Vignette to merge with card base -->
-          <div class="absolute bottom-0 inset-x-0 h-10 bg-gradient-to-t from-[#2a0307] to-transparent pointer-events-none"></div>
-
-          <!-- Subtle Custom Cutout Uploader Tooltip (discreet at bottom right) -->
-          <label for="cutoutInput" class="absolute bottom-2 right-2 bg-black/60 hover:bg-black/80 border border-amber-400/40 text-[10px] text-amber-200 px-2 py-0.5 rounded-full cursor-pointer backdrop-blur-md transition z-20 flex items-center gap-1 opacity-70 hover:opacity-100" title="Upload custom transparent couple cut-out">
-            <svg class="w-3 h-3 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-            </svg>
-            <span>Photo</span>
-          </label>
-          <input type="file" id="cutoutInput" accept="image/*" class="hidden">
+        <!-- Lineage / Parents Info -->
+        <div class="text-xs sm:text-sm text-amber-100/90 leading-relaxed font-sans max-w-xs sm:max-w-sm px-2">
+          <p class="mb-1.5"><strong>Arnav</strong> — Son of Swapna &amp; Partha Sarathi Chakraborty</p>
+          <p><strong>Shaheli</strong> — Daughter of Rupa &amp; Prabir Mukherjee</p>
         </div>
-
-        <!-- Parents Details -->
-        <div class="space-y-2 max-w-sm text-xs sm:text-sm leading-snug text-amber-100/90 mt-1 w-full px-2">
-          <div class="p-2 rounded-xl bg-black/30 border border-amber-500/20">
-            <span class="block text-[10px] uppercase tracking-wider text-amber-400 font-sans font-semibold">Groom</span>
-            <span class="text-sm font-bold text-amber-200">Arnav Chakraborty</span>
-            <span class="block text-[11px] sm:text-xs text-amber-100/80">Son of Swapna &amp; Partha Sarathi Chakraborty</span>
-          </div>
-
-          <div class="p-2 rounded-xl bg-black/30 border border-amber-500/20">
-            <span class="block text-[10px] uppercase tracking-wider text-amber-400 font-sans font-semibold">Bride</span>
-            <span class="text-sm font-bold text-amber-200">Shaheli Mukherjee</span>
-            <span class="block text-[11px] sm:text-xs text-amber-100/80">Daughter of Rupa &amp; Prabir Mukherjee</span>
-          </div>
-        </div>
-
-        <p class="text-[11px] sm:text-xs text-amber-100/85 italic mt-2 px-3 max-w-md">
-          “Please grace the evening with your presence and warm wishes as we begin this cherished chapter together.”
-        </p>
       </section>
-
       <!-- ================= SLIDE 3: RECEPTION & VENUE ================= -->
       <section id="slide-2" class="slide-pane hidden text-center flex flex-col items-center">
         <span class="text-xs font-sans tracking-[0.25em] text-amber-300 uppercase">You Are Cordially Invited To</span>
