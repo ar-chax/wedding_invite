@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Wedding Celebrations — Arnav & Shaheli</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --gold-primary: #f5d061;
+      --gold-deep: #aa771c;
+      --gold-glow: rgba(245, 208, 97, 0.45);
+      --crimson-dark: #190105;
+      --crimson-velvet: #34040d;
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      background: radial-gradient(circle at 50% 20%, #460613 0%, #200207 55%, #0d0003 100%);
+      color: #f7eedc;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+    }
+    .main-card {
+      background: linear-gradient(165deg, rgba(50, 4, 12, 0.94) 0%, rgba(20, 2, 5, 0.98) 100%);
+      border: 1.5px solid rgba(245, 208, 97, 0.4);
+      box-shadow: 0 0 35px rgba(0, 0, 0, 0.8), 0 0 20px rgba(245, 208, 97, 0.2), inset 0 0 15px rgba(245, 208, 97, 0.08);
+      position: relative;
+    }
+    .gold-foil-text {
+      background: linear-gradient(180deg, #fff7d6 0%, #f6d365 40%, #d4af37 75%, #9b6912 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 2px 6px rgba(212, 175, 55, 0.35));
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.2);
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(245, 208, 97, 0.3);
+      border-radius: 4px;
+    }
+    @keyframes floatPetal {
+      0% { transform: translateY(-10px) rotate(0deg); opacity: 0; }
+      15% { opacity: 0.8; }
+      85% { opacity: 0.8; }
+      100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
+    }
+    .petal {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+      animation: floatPetal linear infinite;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Petals Canvas / Background Elements -->
+  <div id="petal-container"></div>
+
+  <!-- Music Toggle Floating Button -->
+  <button id="musicBtn" onclick="toggleAudio()" class="fixed top-4 right-4 z-50 bg-[#2d030b]/90 border border-amber-400/50 text-amber-200 p-2.5 rounded-full shadow-[0_0_15px_rgba(245,208,97,0.3)] hover:scale-105 active:scale-95 transition-transform flex items-center justify-center w-10 h-10" aria-label="Toggle sound">
+    <span id="musicIcon" class="text-base">🎵</span>
+  </button>
+
+  <!-- Audio Element (Loads music.mp3 if available) -->
+  <audio id="bg-audio" loop preload="auto">
+    <source src="music.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- Main Container -->
+  <div class="main-card w-full max-w-[420px] rounded-3xl p-4 sm:p-6 overflow-hidden z-10 flex flex-col justify-between min-h-[580px] max-h-[92vh]">
+    
+    <!-- TOP PROGRESS DOTS -->
+    <div class="flex items-center justify-center gap-2 mb-3">
+      <button onclick="goToSlide(0)" id="dot-0" class="h-1.5 w-6 rounded-full bg-amber-400 transition-all"></button>
+      <button onclick="goToSlide(1)" id="dot-1" class="h-1.5 w-2 rounded-full bg-amber-200/30 transition-all"></button>
+      <button onclick="goToSlide(2)" id="dot-2" class="h-1.5 w-2 rounded-full bg-amber-200/30 transition-all"></button>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- SLIDE 1: AUSPICIOUS INVOCATION & FORMAL INVITE -->
+    <!-- ============================================== -->
+    <section id="slide-0" class="slide-pane text-center flex flex-col items-center justify-between flex-1 py-1">
+      <div>
+        <p class="font-serif text-sm tracking-wider text-amber-300 font-bold mb-3 drop-shadow">
+          ॥ শ্রী শ্রী প্রজাপতয়ে নমঃ ॥
+        </p>
+        <p class="font-serif italic text-xs text-amber-100/90 leading-relaxed px-4 mb-4">
+          &ldquo;As two paths meet and journey into forever, we celebrate love, laughter, and a new beginning.&rdquo;
+        </p>
+      </div>
+
+      <div class="py-2">
+        <p class="text-[11px] tracking-widest text-amber-300/80 uppercase font-sans mb-1.5">Together with their families</p>
+        <h3 class="font-serif text-lg font-bold text-amber-200 leading-snug">
+          Swapna &amp; Partha Sarathi Chakraborty
+        </h3>
+        <p class="text-xs text-amber-100/85 mt-2 px-3 leading-relaxed">
+          cordially invite you to share in the joy and blessings as we celebrate the wedding festivities of their son
+        </p>
+        <div class="my-3">
+          <span class="gold-foil-text font-serif text-2xl font-bold tracking-wider">ARNAV</span>
+          <span class="font-serif italic text-amber-300 mx-2 text-sm">with</span>
+          <span class="gold-foil-text font-serif text-2xl font-bold tracking-wider">SHAHELI</span>
+        </div>
+        <p class="text-[11px] text-amber-200/75 italic">
+          (Daughter of Rupa &amp; Prabir Mukherjee)
+        </p>
+      </div>
+
+      <div class="text-[10px] tracking-wider text-amber-400/80 uppercase">
+        Swipe or tap next for celebration schedule ➔
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- SLIDE 2: THE COUPLE PHOTO & CARDS              -->
+    <!-- ============================================== -->
+    <section id="slide-1" class="slide-pane hidden text-center flex flex-col items-center justify-center flex-1 py-1">
+      <!-- Framed Couple Portrait -->
+      <div class="relative w-40 h-52 sm:w-44 sm:h-56 rounded-t-full rounded-b-2xl overflow-hidden border-2 border-amber-300/80 shadow-[0_0_22px_rgba(245,208,97,0.35)] bg-gradient-to-b from-amber-950/40 via-red-950/60 to-black/80 flex items-center justify-center mb-2.5">
+        <img 
+          src="Image (4).jpg" 
+          alt="Arnav & Shaheli" 
+          class="w-full h-full object-cover object-top"
+          onerror="this.src='couple.png';"
+        />
+      </div>
+
+      <!-- CARDS CONTAINER (MATCHING IMAGE 10) -->
+      <div class="w-full max-w-sm flex flex-col gap-2">
+        <!-- GROOM CARD -->
+        <div style="background: rgba(30, 4, 10, 0.65); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 12px; padding: 8px 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(212, 175, 55, 0.05);">
+          <p style="font-family: sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.18em; color: #ffd269; text-transform: uppercase; margin: 0 0 2px 0;">GROOM</p>
+          <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.12rem; font-weight: 700; color: #ffe6a3; margin: 0 0 2px 0;">Arnav Chakraborty</h3>
+          <p style="font-family: 'Playfair Display', Georgia, serif; font-size: 0.8rem; color: #f5eedc; margin: 0;">Son of Swapna &amp; Partha Sarathi Chakraborty</p>
+        </div>
+
+        <!-- BRIDE CARD -->
+        <div style="background: rgba(30, 4, 10, 0.65); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 12px; padding: 8px 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(212, 175, 55, 0.05);">
+          <p style="font-family: sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.18em; color: #ffd269; text-transform: uppercase; margin: 0 0 2px 0;">BRIDE</p>
+          <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 1.12rem; font-weight: 700; color: #ffe6a3; margin: 0 0 2px 0;">Shaheli Mukherjee</h3>
+          <p style="font-family: 'Playfair Display', Georgia, serif; font-size: 0.8rem; color: #f5eedc; margin: 0;">Daughter of Rupa &amp; Prabir Mukherjee</p>
+        </div>
+      </div>
+
+      <!-- BLESSING QUOTE -->
+      <p style="font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-size: 0.8rem; color: #eddcc2; margin-top: 10px; max-width: 330px; line-height: 1.4; text-shadow: 0 1px 2px rgba(0,0,0,0.6);">
+        &ldquo;Please grace the evening with your presence and warm wishes as we begin this cherished chapter together.&rdquo;
+      </p>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- SLIDE 3: MULTI-DAY ITINERARY                   -->
+    <!-- ============================================== -->
+    <section id="slide-2" class="slide-pane hidden text-center flex flex-col justify-between flex-1 py-1 overflow-y-auto custom-scrollbar">
+      <div class="mb-1.5">
+        <p class="text-[9px] tracking-[0.25em] text-amber-300/90 uppercase font-sans">Celebration Schedule</p>
+        <h2 class="font-serif text-lg sm:text-xl text-amber-200 font-bold tracking-wide">
+          ITINERARY OF EVENTS
+        </h2>
+        <div class="flex items-center justify-center gap-1.5 text-amber-400/70 my-0.5 text-[9px]">
+          <span>❖</span>
+          <span class="w-8 h-px bg-gradient-to-r from-transparent via-amber-400/60 to-transparent"></span>
+          <span>✦</span>
+          <span class="w-8 h-px bg-gradient-to-r from-transparent via-amber-400/60 to-transparent"></span>
+          <span>❖</span>
+        </div>
+      </div>
+
+      <!-- 4-Day Timeline Container -->
+      <div class="w-full flex flex-col gap-1.5 text-left my-auto">
+        <!-- DAY 1: 28 JAN -->
+        <div style="background: rgba(30, 4, 10, 0.65); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 10px; padding: 7px 11px; box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+          <div class="flex items-center justify-between border-b border-amber-400/20 pb-0.5 mb-1">
+            <span style="font-family: 'Playfair Display', Georgia, serif; font-weight: 700; color: #ffe6a3; font-size: 0.82rem;">Thursday, 28 Jan 2027</span>
+            <span class="text-[9px] uppercase tracking-wider text-amber-300/70 font-sans font-semibold">Day 1</span>
+          </div>
+          <div class="flex flex-col gap-0.5 text-[11px] font-sans text-amber-100/90">
+            <div class="flex items-center justify-between">
+              <span>🍚 <strong>Aiburobhat</strong></span>
+              <span class="text-amber-300/80 text-[10px]">Afternoon</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span>🎶 <strong>Sangeet</strong></span>
+              <span class="text-amber-300/80 text-[10px]">Evening</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- DAY 2: 29 JAN -->
+        <div style="background: rgba(30, 4, 10, 0.65); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 10px; padding: 7px 11px; box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+          <div class="flex items-center justify-between border-b border-amber-400/20 pb-0.5 mb-1">
+            <span style="font-family: 'Playfair Display', Georgia, serif; font-weight: 700; color: #ffe6a3; font-size: 0.82rem;">Friday, 29 Jan 2027</span>
+            <span class="text-[9px] uppercase tracking-wider text-amber-300/70 font-sans font-semibold">Day 2</span>
+          </div>
+          <div class="flex flex-col gap-0.5 text-[11px] font-sans text-amber-100/90">
+            <div class="flex items-center justify-between">
+              <span>🌿 <strong>Haldi (Gaye Holud)</strong></span>
+              <span class="text-amber-300/80 text-[10px]">Morning</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span>🔥 <strong>Wedding Ceremony</strong></span>
+              <span class="text-amber-300/80 text-[10px]">Evening</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- DAY 3: 30 JAN -->
+        <div style="background: rgba(30, 4, 10, 0.65); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 10px; padding: 7px 11px; box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+          <div class="flex items-center justify-between border-b border-amber-400/20 pb-0.5 mb-1">
+            <span style="font-family: 'Playfair Display', Georgia, serif; font-weight: 700; color: #ffe6a3; font-size: 0.82rem;">Saturday, 30 Jan 2027</span>
+            <span class="text-[9px] uppercase tracking-wider text-amber-300/70 font-sans font-semibold">Day 3</span>
+          </div>
+          <div class="flex items-center justify-between text-[11px] font-sans text-amber-100/90">
+            <span>🕊️ <strong>Vidai</strong></span>
+            <span class="text-amber-300/80 text-[10px]">Morning</span>
+          </div>
+        </div>
+
+        <!-- DAY 4: 31 JAN (RECEPTION) -->
+        <div style="background: linear-gradient(135deg, rgba(65, 10, 22, 0.8) 0%, rgba(35, 4, 12, 0.85) 100%); border: 1.5px solid rgba(245, 208, 97, 0.7); border-radius: 10px; padding: 7px 11px; box-shadow: 0 0 12px rgba(245, 208, 97, 0.25);">
+          <div class="flex items-center justify-between border-b border-amber-400/30 pb-0.5 mb-1">
+            <span style="font-family: 'Playfair Display', Georgia, serif; font-weight: 700; color: #ffd269; font-size: 0.84rem;">Sunday, 31 Jan 2027</span>
+            <span class="text-[8px] uppercase tracking-wider text-amber-300 font-sans font-bold bg-amber-400/20 px-1 py-0.5 rounded">Grand Finale</span>
+          </div>
+          <div class="flex flex-col gap-0.5 text-[11px] font-sans text-amber-100/90">
+            <div class="flex items-center justify-between">
+              <span>✨ <strong>Wedding Reception</strong></span>
+              <span class="text-amber-300 font-semibold text-[10px]">7:00 PM Onwards</span>
+            </div>
+            <div class="text-[10px] text-amber-200/85 pt-0.5 border-t border-amber-400/15 mt-0.5">
+              <span>📍 Shiv Durga Garden, Michaelnagar</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="w-full mt-2 flex gap-2 justify-center">
+        <a href="https://maps.google.com/?q=Shiv+Durga+Garden+Michaelnagar" target="_blank" rel="noopener noreferrer" style="background: rgba(212, 175, 55, 0.2); border: 1px solid rgba(212, 175, 55, 0.5); border-radius: 8px; padding: 6px 11px; font-size: 11px; color: #ffe6a3; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+          <span>📍 Directions</span>
+        </a>
+        <button onclick="downloadCalendarInvite()" style="background: rgba(212, 175, 55, 0.2); border: 1px solid rgba(212, 175, 55, 0.5); border-radius: 8px; padding: 6px 11px; font-size: 11px; color: #ffe6a3; cursor: pointer;">
+          <span>🗓️ Add to Calendar</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- NAVIGATION ARROWS -->
+    <div class="flex items-center justify-between pt-2 border-t border-amber-400/20 mt-2">
+      <button id="prevBtn" onclick="prevSlide()" class="opacity-0 pointer-events-none text-xs font-semibold text-amber-300 flex items-center gap-1 transition-opacity">
+        <span>←</span> Previous
+      </button>
+      <span class="text-[10px] text-amber-200/50 uppercase tracking-widest" id="slideIndicator">1 / 3</span>
+      <button id="nextBtn" onclick="nextSlide()" class="text-xs font-semibold text-amber-300 flex items-center gap-1 transition-opacity">
+        Next <span>→</span>
+      </button>
+    </div>
+
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    const totalSlides = 3;
+
+    function updateSlides() {
+      for (let i = 0; i < totalSlides; i++) {
+        const slide = document.getElementById(`slide-${i}`);
+        const dot = document.getElementById(`dot-${i}`);
+        if (i === currentSlide) {
+          slide.classList.remove('hidden');
+          dot.classList.remove('bg-amber-200/30', 'w-2');
+          dot.classList.add('bg-amber-400', 'w-6');
+        } else {
+          slide.classList.add('hidden');
+          dot.classList.remove('bg-amber-400', 'w-6');
+          dot.classList.add('bg-amber-200/30', 'w-2');
+        }
+      }
+
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const indicator = document.getElementById('slideIndicator');
+
+      indicator.textContent = `${currentSlide + 1} / ${totalSlides}`;
+
+      if (currentSlide === 0) {
+        prevBtn.classList.add('opacity-0', 'pointer-events-none');
+      } else {
+        prevBtn.classList.remove('opacity-0', 'pointer-events-none');
+      }
+
+      if (currentSlide === totalSlides - 1) {
+        nextBtn.innerHTML = 'Finish <span>✦</span>';
+      } else {
+        nextBtn.innerHTML = 'Next <span>→</span>';
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) {
+        currentSlide++;
+        updateSlides();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlides();
+      }
+    }
+
+    function goToSlide(idx) {
+      currentSlide = idx;
+      updateSlides();
+    }
+
+    // Touch Swipe Support
+    let startX = 0;
+    document.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+    document.addEventListener('touchend', e => {
+      const diffX = startX - e.changedTouches[0].clientX;
+      if (diffX > 45) nextSlide();
+      if (diffX < -45) prevSlide();
+    }, { passive: true });
+
+    // Calendar (.ics) Generator
+    function downloadCalendarInvite() {
+      const icsData = [
+        "BEGIN:VCALENDAR",
+        "VERSION:2.0",
+        "PRODID:-//Arnav & Shaheli//Wedding Invite//EN",
+        "CALSCALE:GREGORIAN",
+        "METHOD:PUBLISH",
+        "BEGIN:VEVENT",
+        "SUMMARY:Arnav & Shaheli - Wedding Reception",
+        "DESCRIPTION:Reception celebration of Arnav Chakraborty & Shaheli Mukherjee at Shiv Durga Garden, Michaelnagar.",
+        "LOCATION:Shiv Durga Garden, Michaelnagar, Kolkata",
+        "DTSTART:20270131T133000Z",
+        "DTEND:20270131T183000Z",
+        "STATUS:CONFIRMED",
+        "END:VEVENT",
+        "END:VCALENDAR"
+      ].join("\r\n");
+
+      const blob = new Blob([icsData], { type: "text/calendar;charset=utf-8" });
+      const link = document.createElement("a");
+      link.href = window.URL.createObjectURL(blob);
+      link.setAttribute("download", "Arnav_Shaheli_Wedding_Reception.ics");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // Audio & Synth Fallback
+    const audio = document.getElementById('bg-audio');
+    const musicBtn = document.getElementById('musicBtn');
+    let isPlaying = false;
+    let audioCtx = null;
+    let synthTimer = null;
+
+    function playIndianSynth() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const notes = [293.66, 329.63, 369.99, 440.00, 493.88, 587.33];
+      function triggerTone() {
+        if (!isPlaying) return;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(notes[Math.floor(Math.random() * notes.length)], audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.08, audioCtx.currentTime + 0.3);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.8);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 1.9);
+        synthTimer = setTimeout(triggerTone, 1400);
+      }
+      triggerTone();
+    }
+
+    function toggleAudio() {
+      if (!isPlaying) {
+        isPlaying = true;
+        musicBtn.classList.add('scale-110', 'border-amber-300');
+        if (audio && audio.src && !audio.error) {
+          audio.play().catch(() => playIndianSynth());
+        } else {
+          playIndianSynth();
+        }
+      } else {
+        isPlaying = false;
+        musicBtn.classList.remove('scale-110', 'border-amber-300');
+        if (audio) audio.pause();
+        if (synthTimer) clearTimeout(synthTimer);
+      }
+    }
+
+    // Floating Marigold Petals
+    function createPetals() {
+      const container = document.getElementById('petal-container');
+      const colors = ['#f59e0b', '#fbbf24', '#d97706', '#dc2626'];
+      for (let i = 0; i < 18; i++) {
+        const petal = document.createElement('div');
+        petal.className = 'petal';
+        const size = Math.random() * 8 + 8;
+        petal.style.width = `${size}px`;
+        petal.style.height = `${size * 1.3}px`;
+        petal.style.borderRadius = '50% 50% 50% 0';
+        petal.style.background = colors[Math.floor(Math.random() * colors.length)];
+        petal.style.left = `${Math.random() * 100}vw`;
+        petal.style.animationDuration = `${Math.random() * 6 + 6}s`;
+        petal.style.animationDelay = `${Math.random() * 5}s`;
+        container.appendChild(petal);
+      }
+    }
+    createPetals();
+  </script>
+</body>
+</html>
