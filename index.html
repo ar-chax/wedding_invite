@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wedding Reception Invite | Arnav & Shaheli</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Yatra+One&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    /* Custom font families */
+    .font-cinzel { font-family: 'Cinzel Decorative', serif; }
+    .font-script { font-family: 'Great Vibes', cursive; }
+    .font-serif-royal { font-family: 'Playfair Display', serif; }
+    .font-bengali { font-family: 'Yatra One', cursive, serif; }
+
+    /* Rich Royal Crimson & Gold Palettes */
+    :root {
+      --gold-primary: #f5d061;
+      --gold-dark: #b8860b;
+      --gold-glow: rgba(245, 208, 97, 0.45);
+      --crimson-dark: #2a0307;
+      --crimson-rich: #4f0912;
+      --crimson-light: #7a1420;
+    }
+
+    body {
+      background-color: var(--crimson-dark);
+      background-image: 
+        radial-gradient(circle at 50% 15%, rgba(122, 20, 32, 0.45) 0%, rgba(20, 2, 4, 0.95) 100%),
+        radial-gradient(rgba(218, 165, 32, 0.08) 1px, transparent 1px);
+      background-size: 100% 100%, 28px 28px;
+      color: #fff9ed;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* Metallic Gold Shimmer Gradient */
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #fff3c4 0%, #f7d070 30%, #cf9b27 65%, #fbe8a6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 15px rgba(245, 208, 97, 0.3);
+    }
+
+    .gold-border {
+      border: 1.5px solid rgba(245, 208, 97, 0.65);
+      box-shadow: 0 0 20px rgba(184, 134, 11, 0.25), inset 0 0 15px rgba(184, 134, 11, 0.15);
+    }
+
+    .card-glass {
+      background: linear-gradient(160deg, rgba(79, 9, 18, 0.82) 0%, rgba(35, 4, 8, 0.92) 100%);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    /* Couple Archway & 2D Blending Styles */
+    .couple-arch-container {
+      position: relative;
+      width: 100%;
+      max-width: 280px;
+      height: 240px;
+      margin: 0 auto;
+      border-radius: 140px 140px 16px 16px;
+      overflow: hidden;
+      border: 2px solid rgba(245, 208, 97, 0.7);
+      box-shadow: 0 0 25px rgba(245, 208, 97, 0.35), inset 0 0 20px rgba(0, 0, 0, 0.7);
+      background: radial-gradient(circle at 50% 40%, rgba(245, 208, 97, 0.22) 0%, rgba(68, 8, 16, 0.85) 75%, #1f0205 100%);
+    }
+
+    .couple-image-blend {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter: sepia(0.2) saturate(1.15) contrast(1.05) brightness(0.98);
+      mask-image: radial-gradient(ellipse at 50% 50%, black 55%, rgba(0,0,0,0.5) 80%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 50%, black 55%, rgba(0,0,0,0.5) 80%, transparent 100%);
+    }
+
+    /* Floating Petals Canvas */
+    #petalsCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* Alpana Corner Elements */
+    .alpana-corner {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      pointer-events: none;
+      opacity: 0.85;
+    }
+    .alpana-tl { top: 12px; left: 12px; }
+    .alpana-tr { top: 12px; right: 12px; transform: scaleX(-1); }
+    .alpana-bl { bottom: 12px; left: 12px; transform: scaleY(-1); }
+    .alpana-br { bottom: 12px; right: 12px; transform: scale(-1, -1); }
+
+    /* Slide Transition Animations */
+    .slide-enter-right {
+      animation: enterRight 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .slide-enter-left {
+      animation: enterLeft 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes enterRight {
+      from { opacity: 0; transform: translateX(35px) scale(0.98); }
+      to { opacity: 1; transform: translateX(0) scale(1); }
+    }
+    @keyframes enterLeft {
+      from { opacity: 0; transform: translateX(-35px) scale(0.98); }
+      to { opacity: 1; transform: translateX(0) scale(1); }
+    }
+
+    /* Shimmering Button */
+    .btn-gold {
+      background: linear-gradient(135deg, #dfa735 0%, #b8860b 50%, #8c6300 100%);
+      box-shadow: 0 4px 18px rgba(184, 134, 11, 0.45);
+      transition: all 0.3s ease;
+    }
+    .btn-gold:hover {
+      background: linear-gradient(135deg, #fedb72 0%, #d49e19 50%, #9e7204 100%);
+      box-shadow: 0 6px 24px rgba(245, 208, 97, 0.6);
+      transform: translateY(-2px);
+    }
+
+    /* Custom Pulse Glow */
+    .glow-ring {
+      animation: pulseGlow 2.8s infinite ease-in-out;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 15px rgba(245, 208, 97, 0.3); }
+      50% { box-shadow: 0 0 28px rgba(245, 208, 97, 0.65); }
+    }
+  </style>
+</head>
+<body class="flex flex-col items-center justify-center p-3 sm:p-6 select-none font-serif-royal">
+
+  <!-- Floating Falling Petals Canvas -->
+  <canvas id="petalsCanvas"></canvas>
+
+  <!-- Ambient Sound Controls & Top Bar -->
+  <header class="w-full max-w-lg flex items-center justify-between px-3 py-2 text-xs sm:text-sm text-amber-200/80 mb-2 z-20">
+    <div class="flex items-center gap-2 tracking-widest font-sans uppercase text-[11px] text-amber-300">
+      <span class="inline-block w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+      Interactive E-Invite
+    </div>
+    <button id="audioToggleBtn" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-red-950/70 border border-amber-500/40 hover:border-amber-400 transition text-amber-200 text-xs backdrop-blur-md">
+      <svg id="audioIcon" class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <!-- Default Muted -->
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/>
+      </svg>
+      <span id="audioLabel">Music: Off</span>
+    </button>
+  </header>
+
+  <!-- Main Card Container -->
+  <main class="relative w-full max-w-lg min-h-[610px] sm:min-h-[640px] card-glass rounded-3xl gold-border p-6 sm:p-9 shadow-2xl flex flex-col justify-between overflow-hidden z-20 glow-ring">
+    
+    <!-- Authentic SVG Alpana Motifs on 4 Corners -->
+    <svg class="alpana-corner alpana-tl" viewBox="0 0 100 100" fill="none" stroke="#f5d061" stroke-width="2">
+      <circle cx="20" cy="20" r="16" stroke-opacity="0.3"/>
+      <path d="M0,0 Q50,15 80,80 Q15,50 0,0 Z" fill="rgba(245, 208, 97, 0.12)"/>
+      <path d="M10,0 C25,25 25,25 0,10 M20,0 C40,40 40,40 0,20 M30,0 C60,60 60,60 0,30" stroke-linecap="round" stroke-opacity="0.75"/>
+      <circle cx="10" cy="10" r="3" fill="#f5d061"/>
+    </svg>
+    <svg class="alpana-corner alpana-tr" viewBox="0 0 100 100" fill="none" stroke="#f5d061" stroke-width="2">
+      <circle cx="20" cy="20" r="16" stroke-opacity="0.3"/>
+      <path d="M0,0 Q50,15 80,80 Q15,50 0,0 Z" fill="rgba(245, 208, 97, 0.12)"/>
+      <path d="M10,0 C25,25 25,25 0,10 M20,0 C40,40 40,40 0,20 M30,0 C60,60 60,60 0,30" stroke-linecap="round" stroke-opacity="0.75"/>
+      <circle cx="10" cy="10" r="3" fill="#f5d061"/>
+    </svg>
+    <svg class="alpana-corner alpana-bl" viewBox="0 0 100 100" fill="none" stroke="#f5d061" stroke-width="2">
+      <circle cx="20" cy="20" r="16" stroke-opacity="0.3"/>
+      <path d="M0,0 Q50,15 80,80 Q15,50 0,0 Z" fill="rgba(245, 208, 97, 0.12)"/>
+      <path d="M10,0 C25,25 25,25 0,10 M20,0 C40,40 40,40 0,20 M30,0 C60,60 60,60 0,30" stroke-linecap="round" stroke-opacity="0.75"/>
+      <circle cx="10" cy="10" r="3" fill="#f5d061"/>
+    </svg>
+    <svg class="alpana-corner alpana-br" viewBox="0 0 100 100" fill="none" stroke="#f5d061" stroke-width="2">
+      <circle cx="20" cy="20" r="16" stroke-opacity="0.3"/>
+      <path d="M0,0 Q50,15 80,80 Q15,50 0,0 Z" fill="rgba(245, 208, 97, 0.12)"/>
+      <path d="M10,0 C25,25 25,25 0,10 M20,0 C40,40 40,40 0,20 M30,0 C60,60 60,60 0,30" stroke-linecap="round" stroke-opacity="0.75"/>
+      <circle cx="10" cy="10" r="3" fill="#f5d061"/>
+    </svg>
+
+    <!-- Top Indicator: Step tracker & Bengali auspicious symbol -->
+    <div class="relative text-center pt-2">
+      <div class="inline-flex items-center gap-1.5 py-1 px-3.5 rounded-full bg-amber-950/60 border border-amber-500/30 text-amber-300 text-xs tracking-wider">
+        <span id="chapterTitle">Part I • The Auspicious Dawn</span>
+      </div>
+      <!-- Dots -->
+      <div class="flex items-center justify-center gap-2.5 mt-3">
+        <button onclick="goToSlide(0)" class="step-dot w-8 h-2 rounded-full transition-all duration-300 bg-amber-400 shadow-sm" aria-label="Slide 1"></button>
+        <button onclick="goToSlide(1)" class="step-dot w-2.5 h-2 rounded-full transition-all duration-300 bg-amber-300/30" aria-label="Slide 2"></button>
+        <button onclick="goToSlide(2)" class="step-dot w-2.5 h-2 rounded-full transition-all duration-300 bg-amber-300/30" aria-label="Slide 3"></button>
+      </div>
+    </div>
+
+    <!-- SLIDE CONTENT CONTAINER -->
+    <div id="slideViewport" class="my-auto py-4 relative w-full">
+
+      <!-- ================= SLIDE 1: AUSPICIOUS BEGINNINGS ================= -->
+      <section id="slide-0" class="slide-pane text-center flex flex-col items-center">
+        <!-- Auspicious Inscription -->
+        <p class="font-bengali text-lg sm:text-xl text-amber-300 tracking-widest drop-shadow-md mb-2">
+          ॥ শ্রী শ্রী প্রজাপতয়ে নমঃ ॥
+        </p>
+
+        <!-- Decorative Floral Icon / Butterfly Kalash -->
+        <div class="my-2 text-amber-300">
+          <svg class="w-10 h-10 mx-auto" viewBox="0 0 64 64" fill="currentColor">
+            <path d="M32 6 C28 14 18 18 10 24 C2 30 4 42 14 46 C22 49 28 44 32 38 C36 44 42 49 50 46 C60 42 62 30 54 24 C46 18 36 14 32 6 Z" fill="none" stroke="#f5d061" stroke-width="2.5"/>
+            <circle cx="32" cy="22" r="3" fill="#f5d061"/>
+            <path d="M22 34 C28 38 36 38 42 34" stroke="#f5d061" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+
+        <h1 class="font-cinzel text-2xl sm:text-3xl font-bold tracking-wider gold-gradient-text mt-1">
+          SHUBHO BIBAHO
+        </h1>
+        <p class="text-xs uppercase tracking-[0.28em] text-amber-200/75 mt-1 font-sans">
+          A Celebration of Togetherness
+        </p>
+
+        <!-- Poetic quote -->
+        <div class="relative my-6 px-4 py-3 border-y border-amber-500/25 max-w-sm">
+          <p class="font-script text-xl sm:text-2xl text-amber-100 leading-snug">
+            “As two paths meet and journey into forever, we celebrate love, laughter, and a new beginning.”
+          </p>
+        </div>
+
+        <!-- Invitation text -->
+        <p class="text-sm sm:text-base text-amber-100/90 leading-relaxed max-w-md px-2 font-serif-royal">
+          Together with their families,
+          <br>
+          <span class="font-semibold text-amber-300 text-base sm:text-lg">Swapna &amp; Partha Sarathi Chakraborty</span>
+          <br>
+          cordially invite you to celebrate the wedding reception of their son.
+        </p>
+      </section>
+
+      <!-- ================= SLIDE 2: THE COUPLE ================= -->
+      <section id="slide-1" class="slide-pane hidden text-center flex flex-col items-center">
+        <!-- Bengali Topor & Mukut Minimalist Emblem -->
+        <div class="relative mb-1">
+          <svg class="w-16 h-10 mx-auto text-amber-300" viewBox="0 0 100 50" fill="none" stroke="#f5d061" stroke-width="2.2">
+            <!-- Topor conical shape -->
+            <path d="M30 45 L38 8 L46 45 Z" stroke-linejoin="round" fill="rgba(245, 208, 97, 0.15)"/>
+            <circle cx="38" cy="5" r="2.5" fill="#f5d061"/>
+            <!-- Mukut tiara shape -->
+            <path d="M54 45 L58 18 L66 32 L74 15 L82 45 Z" stroke-linejoin="round" fill="rgba(245, 208, 97, 0.15)"/>
+            <circle cx="74" cy="11" r="2" fill="#f5d061"/>
+          </svg>
+        </div>
+
+        <p class="text-[11px] sm:text-xs tracking-[0.25em] text-amber-300 uppercase font-sans">The Auspicious Union</p>
+
+        <!-- Groom & Bride Names -->
+        <div class="my-2 py-1 w-full bg-gradient-to-r from-transparent via-red-950/60 to-transparent border-y border-amber-500/30">
+          <h2 class="font-cinzel text-2xl sm:text-3xl font-extrabold gold-gradient-text tracking-wide">
+            ARNAV <span class="font-script text-xl sm:text-2xl text-amber-200 lowercase">&amp;</span> SHAHELI
+          </h2>
+        </div>
+
+        <!-- 2D Blended Couple Portrait inside Royal Jharokha Arch -->
+        <div class="couple-arch-container my-2 flex items-center justify-center relative group">
+          <!-- Marigold floral garland arch overlay -->
+          <div class="absolute top-0 inset-x-0 h-6 flex justify-around items-center px-4 z-10 pointer-events-none opacity-85">
+            <span class="text-sm">🌼</span><span class="text-xs">🌸</span><span class="text-sm">🌼</span><span class="text-xs">🌸</span><span class="text-sm">🌼</span>
+          </div>
+
+          <!-- Stylized 2D Dancing Vector Silhouette blended into the theme -->
+          <div id="coupleGraphicWrapper" class="w-full h-full flex items-center justify-center relative">
+            <svg id="coupleVectorSvg" class="w-full h-full p-2" viewBox="0 0 300 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <!-- Warm Golden Foil Gradient for the couple -->
+                <linearGradient id="goldDressGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#fff4cf" />
+                  <stop offset="40%" stop-color="#f8d374" />
+                  <stop offset="75%" stop-color="#d49e29" />
+                  <stop offset="100%" stop-color="#996c0d" />
+                </linearGradient>
+                <linearGradient id="suitGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#eed8b3" />
+                  <stop offset="100%" stop-color="#a88c63" />
+                </linearGradient>
+                <radialGradient id="twirlGlow" cx="55%" cy="60%" r="50%">
+                  <stop offset="0%" stop-color="rgba(245, 208, 97, 0.4)" />
+                  <stop offset="100%" stop-color="transparent" />
+                </radialGradient>
+              </defs>
+
+              <!-- Ambient Glow behind dancing couple -->
+              <circle cx="160" cy="150" r="90" fill="url(#twirlGlow)"/>
+
+              <!-- Sparkles around the twirl -->
+              <circle cx="95" cy="70" r="2" fill="#fff" opacity="0.8"/>
+              <circle cx="210" cy="85" r="2.5" fill="#fce49d" opacity="0.9"/>
+              <circle cx="230" cy="180" r="1.8" fill="#f5d061" opacity="0.7"/>
+              <circle cx="75" cy="190" r="2" fill="#f5d061" opacity="0.7"/>
+
+              <!-- GROOM (Arnav): Standing on left in beige suit, holding bride's hand high -->
+              <g id="groomPose">
+                <!-- Head & Hair -->
+                <circle cx="112" cy="82" r="13" fill="#6a3512"/>
+                <circle cx="114" cy="84" r="10.5" fill="#f3c99f"/>
+                <!-- Hair texture -->
+                <path d="M102 80 C103 70 120 68 124 76 C125 80 121 84 121 84" fill="#42200b"/>
+                <!-- Spectacles -->
+                <rect x="111" y="80" width="6" height="4" rx="1.5" stroke="#42200b" stroke-width="1.2" fill="none"/>
+                <!-- Suit Jacket & Torso -->
+                <path d="M96 98 L114 96 L130 102 L132 158 L94 158 Z" fill="url(#suitGrad)"/>
+                <!-- Inner Navy shirt collar -->
+                <path d="M110 97 L115 116 L120 97 Z" fill="#1b2a47"/>
+                <!-- Suit Trousers -->
+                <path d="M96 158 L111 158 L110 248 L93 248 Z" fill="#bfa37b"/>
+                <path d="M113 158 L130 158 L132 248 L115 248 Z" fill="#a88e68"/>
+                <!-- Shoes -->
+                <ellipse cx="101" cy="250" rx="9" ry="4" fill="#1b120c"/>
+                <ellipse cx="124" cy="250" rx="9" ry="4" fill="#1b120c"/>
+                <!-- Right Raised Arm holding bride's hand -->
+                <path d="M125 104 L154 62 L163 67 L132 114 Z" fill="url(#suitGrad)"/>
+                <circle cx="158" cy="62" r="5" fill="#e8ba8c"/>
+              </g>
+
+              <!-- BRIDE (Shaheli): Twirling in shimmering ruffled lehenga -->
+              <g id="bridePose">
+                <!-- Raised Left Arm joining groom's hand high -->
+                <path d="M184 102 L162 64 L156 68 L177 107 Z" fill="#f3c99f"/>
+                <!-- Bangles on raised wrist -->
+                <circle cx="163" cy="73" r="3.5" stroke="#f5d061" stroke-width="1.5" fill="none"/>
+                <!-- Head & Flowing Hair -->
+                <!-- Hair flowing behind in motion -->
+                <path d="M180 84 Q210 95 218 128 Q202 120 186 98 Z" fill="#2d1607"/>
+                <circle cx="180" cy="85" r="10" fill="#f3c99f"/>
+                <path d="M172 82 C175 73 189 74 191 82 C192 88 186 90 186 90" fill="#2d1607"/>
+                <!-- Glasses -->
+                <rect x="174" y="82" width="6" height="4" rx="1.5" stroke="#8a531b" stroke-width="1" fill="none"/>
+                <!-- Blouse / Choli -->
+                <path d="M172 96 C176 94 186 94 191 97 L190 124 C185 125 177 125 171 123 Z" fill="url(#goldDressGrad)"/>
+                <!-- Flowing Dupatta drape -->
+                <path d="M170 102 Q156 128 152 165 Q164 158 174 125 Z" fill="rgba(255, 237, 184, 0.7)"/>
+
+                <!-- Wide Twirling Ruffled Ghagra / Skirt (Iconic Flared Motion) -->
+                <!-- Base flare -->
+                <path d="M172 124 C182 124 188 124 190 124 Q240 178 258 226 Q185 242 124 220 Q150 170 172 124 Z" fill="url(#goldDressGrad)" stroke="#c49021" stroke-width="1"/>
+                <!-- Tiered Ruffle Flounce Curves -->
+                <path d="M136 205 Q190 220 248 212" stroke="#fff1bd" stroke-width="2.5" fill="none" opacity="0.85"/>
+                <path d="M128 216 Q188 232 254 220" stroke="#ffd97d" stroke-width="3" fill="none" opacity="0.95"/>
+                <path d="M124 224 Q186 244 258 226" stroke="#996a0b" stroke-width="2" fill="none"/>
+
+                <!-- Golden Embroidered Shimmer detailing on skirt -->
+                <path d="M160 148 Q182 176 195 210" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" stroke-dasharray="3,3" fill="none"/>
+                <path d="M182 144 Q204 172 222 204" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" stroke-dasharray="3,3" fill="none"/>
+              </g>
+
+              <!-- Joining of Hands Clasp -->
+              <circle cx="160" cy="65" r="4.5" fill="#fbe39e" stroke="#c99726" stroke-width="1"/>
+              <!-- Blessing petals at feet -->
+              <ellipse cx="188" cy="242" rx="6" ry="2" fill="#ff7f00" opacity="0.85"/>
+              <ellipse cx="140" cy="238" rx="5" ry="2.2" fill="#e63946" opacity="0.85"/>
+              <ellipse cx="216" cy="236" rx="6" ry="2.5" fill="#ffd700" opacity="0.85"/>
+            </svg>
+
+            <!-- Dynamic Image Overlay: Displays cut-out if provided -->
+            <img id="customCouplePhoto" class="couple-image-blend hidden absolute inset-0 w-full h-full" alt="Arnav & Shaheli">
+          </div>
+
+          <!-- Bottom Soft Gradient Vignette to merge with card base -->
+          <div class="absolute bottom-0 inset-x-0 h-10 bg-gradient-to-t from-[#2a0307] to-transparent pointer-events-none"></div>
+
+          <!-- Subtle Custom Cutout Uploader Tooltip (discreet at bottom right) -->
+          <label for="cutoutInput" class="absolute bottom-2 right-2 bg-black/60 hover:bg-black/80 border border-amber-400/40 text-[10px] text-amber-200 px-2 py-0.5 rounded-full cursor-pointer backdrop-blur-md transition z-20 flex items-center gap-1 opacity-70 hover:opacity-100" title="Upload custom transparent couple cut-out">
+            <svg class="w-3 h-3 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+            <span>Photo</span>
+          </label>
+          <input type="file" id="cutoutInput" accept="image/*" class="hidden">
+        </div>
+
+        <!-- Parents Details -->
+        <div class="space-y-2 max-w-sm text-xs sm:text-sm leading-snug text-amber-100/90 mt-1 w-full px-2">
+          <div class="p-2 rounded-xl bg-black/30 border border-amber-500/20">
+            <span class="block text-[10px] uppercase tracking-wider text-amber-400 font-sans font-semibold">Groom</span>
+            <span class="text-sm font-bold text-amber-200">Arnav Chakraborty</span>
+            <span class="block text-[11px] sm:text-xs text-amber-100/80">Son of Swapna &amp; Partha Sarathi Chakraborty</span>
+          </div>
+
+          <div class="p-2 rounded-xl bg-black/30 border border-amber-500/20">
+            <span class="block text-[10px] uppercase tracking-wider text-amber-400 font-sans font-semibold">Bride</span>
+            <span class="text-sm font-bold text-amber-200">Shaheli Mukherjee</span>
+            <span class="block text-[11px] sm:text-xs text-amber-100/80">Daughter of Rupa &amp; Prabir Mukherjee</span>
+          </div>
+        </div>
+
+        <p class="text-[11px] sm:text-xs text-amber-100/85 italic mt-2 px-3 max-w-md">
+          “Please grace the evening with your presence and warm wishes as we begin this cherished chapter together.”
+        </p>
+      </section>
+
+      <!-- ================= SLIDE 3: RECEPTION & VENUE ================= -->
+      <section id="slide-2" class="slide-pane hidden text-center flex flex-col items-center">
+        <span class="text-xs font-sans tracking-[0.25em] text-amber-300 uppercase">You Are Cordially Invited To</span>
+        <h2 class="font-cinzel text-2xl sm:text-3xl font-extrabold gold-gradient-text tracking-wide mt-1">
+          WEDDING RECEPTION
+        </h2>
+
+        <!-- Event Cards Details -->
+        <div class="grid grid-cols-2 gap-3 w-full my-4">
+          <!-- Date -->
+          <div class="p-3 rounded-2xl bg-black/35 border border-amber-500/30 flex flex-col items-center justify-center">
+            <svg class="w-6 h-6 text-amber-300 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+            <span class="text-xs uppercase tracking-wider text-amber-400 font-sans">Date</span>
+            <span class="text-sm sm:text-base font-bold text-amber-100">Sunday</span>
+            <span class="text-xs sm:text-sm font-semibold text-amber-200">31 January 2027</span>
+          </div>
+
+          <!-- Time -->
+          <div class="p-3 rounded-2xl bg-black/35 border border-amber-500/30 flex flex-col items-center justify-center">
+            <svg class="w-6 h-6 text-amber-300 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <span class="text-xs uppercase tracking-wider text-amber-400 font-sans">Time</span>
+            <span class="text-sm sm:text-base font-bold text-amber-100">Evening</span>
+            <span class="text-xs sm:text-sm font-semibold text-amber-200">7:00 PM Onwards</span>
+          </div>
+        </div>
+
+        <!-- Venue Box -->
+        <div class="w-full p-3.5 rounded-2xl bg-black/40 border border-amber-500/35 text-center shadow-lg">
+          <div class="flex items-center justify-center gap-1.5 text-amber-400 text-xs font-sans uppercase tracking-widest font-semibold mb-1">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+            Venue
+          </div>
+          <p class="text-base sm:text-lg font-bold text-amber-200">Shiv Durga Garden</p>
+          <p class="text-xs sm:text-sm text-amber-100/80">Michaelnagar, Kolkata, West Bengal 700133</p>
+        </div>
+
+        <!-- Action Buttons: Calendar & Map Directions -->
+        <div class="flex flex-wrap gap-2.5 w-full justify-center mt-4">
+          <!-- Add to Calendar -->
+          <button id="addToCalBtn" class="flex-1 min-w-[140px] px-3.5 py-2.5 rounded-xl bg-amber-500/20 border border-amber-400/50 hover:bg-amber-500/30 text-amber-200 text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5 transition active:scale-95 shadow">
+            <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+            </svg>
+            Add to Calendar
+          </button>
+
+          <!-- Get Directions (Google Maps) -->
+          <a href="https://www.google.com/maps/search/?api=1&query=Shiv+Durga+Garden+and+Banquet+Hall+Michaelnagar+Kolkata" target="_blank" rel="noopener noreferrer" class="flex-1 min-w-[140px] px-3.5 py-2.5 rounded-xl bg-amber-500/20 border border-amber-400/50 hover:bg-amber-500/30 text-amber-200 text-xs sm:text-sm font-semibold flex items-center justify-center gap-1.5 transition active:scale-95 shadow">
+            <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>
+            </svg>
+            Directions
+          </a>
+        </div>
+
+        <!-- Blessings / RSVP Trigger -->
+        <button id="openBlessingsBtn" class="mt-2 text-xs text-amber-300/90 underline hover:text-amber-200 tracking-wide font-sans py-1">
+          ✨ Tap to send warm blessings / RSVP
+        </button>
+
+        <p class="text-[11px] sm:text-xs text-amber-300/70 mt-3 font-sans italic border-t border-amber-500/20 pt-2 w-full">
+          With best compliments &amp; warm regards:<br>
+          <span class="text-amber-200 font-serif font-medium">Chakraborty &amp; Mukherjee Families</span>
+        </p>
+      </section>
+
+    </div>
+
+    <!-- Bottom Navigation Bar -->
+    <div class="relative pt-2 border-t border-amber-500/20 flex items-center justify-between gap-3">
+      <!-- Back Button -->
+      <button id="prevBtn" onclick="prevSlide()" class="px-4 py-2.5 rounded-xl border border-amber-500/30 hover:border-amber-400/60 bg-red-950/40 text-amber-300 text-xs sm:text-sm font-semibold flex items-center gap-1.5 opacity-0 pointer-events-none transition duration-200 active:scale-95">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        <span>Back</span>
+      </button>
+
+      <!-- Petal shower button (interactive sparkle) -->
+      <button onclick="triggerPetalsCelebration()" title="Shower flower blessings" class="p-2.5 rounded-full border border-amber-400/40 bg-amber-950/50 hover:bg-amber-800/60 text-amber-300 transition active:scale-90" aria-label="Shower petals">
+        🌸
+      </button>
+
+      <!-- Next Button -->
+      <button id="nextBtn" onclick="nextSlide()" class="btn-gold px-5 py-2.5 rounded-xl text-red-950 font-bold text-xs sm:text-sm tracking-wide flex items-center gap-1.5 transition active:scale-95 shadow-md">
+        <span id="nextBtnText">Meet the Couple</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+      </button>
+    </div>
+
+  </main>
+
+  <!-- Interactive Blessings Modal -->
+  <div id="blessingsModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="relative w-full max-w-sm card-glass rounded-2xl gold-border p-5 text-center shadow-2xl">
+      <button onclick="closeBlessingsModal()" class="absolute top-3 right-3 text-amber-400 hover:text-amber-200 p-1">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+
+      <span class="text-2xl">🪔</span>
+      <h3 class="font-cinzel text-lg font-bold text-amber-300 mt-1">Shower Your Blessings</h3>
+      <p class="text-xs text-amber-100/80 mt-1 mb-4 font-sans">
+        Send warm wishes to Arnav &amp; Shaheli for their reception.
+      </p>
+
+      <input id="guestNameInput" type="text" placeholder="Your Name" class="w-full px-3 py-2 rounded-lg bg-black/50 border border-amber-500/40 text-amber-100 text-sm focus:outline-none focus:border-amber-300 mb-2 placeholder-amber-200/40">
+      
+      <textarea id="guestMessageInput" rows="3" placeholder="Write your heartfelt blessings or RSVP message..." class="w-full px-3 py-2 rounded-lg bg-black/50 border border-amber-500/40 text-amber-100 text-sm focus:outline-none focus:border-amber-300 mb-3 placeholder-amber-200/40"></textarea>
+
+      <div class="flex gap-2">
+        <button onclick="sendBlessing()" class="flex-1 btn-gold py-2 rounded-lg text-red-950 font-bold text-sm tracking-wide">
+          Send Blessing ❤️
+        </button>
+      </div>
+
+      <!-- Toast Feedback -->
+      <p id="modalFeedback" class="hidden text-xs text-amber-300 font-semibold mt-3 animate-pulse"></p>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastMessage" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-red-950 border border-amber-400 text-amber-200 px-4 py-2 rounded-full shadow-2xl text-xs z-50 opacity-0 pointer-events-none transition-opacity duration-300 flex items-center gap-2">
+    <span>✨</span>
+    <span id="toastText">Event saved to calendar!</span>
+  </div>
+
+  <!-- Logic & Scripts -->
+  <script>
+    /* =====================================================================
+       1. STATE & SLIDE NAVIGATION
+       ===================================================================== */
+    let currentSlide = 0;
+    const totalSlides = 3;
+    const titles = [
+      "Part I • The Auspicious Dawn",
+      "Part II • The Couple & Families",
+      "Part III • The Reception & Venue"
+    ];
+    const nextButtonLabels = [
+      "Meet the Couple",
+      "Venue & Reception",
+      "Celebrate With Us"
+    ];
+
+    function updateSlideUI(direction = 1) {
+      // Hide all slides
+      for (let i = 0; i < totalSlides; i++) {
+        const slide = document.getElementById(`slide-${i}`);
+        slide.classList.add('hidden');
+        slide.classList.remove('slide-enter-right', 'slide-enter-left');
+      }
+
+      // Show current slide with directional animation
+      const activeSlide = document.getElementById(`slide-${currentSlide}`);
+      activeSlide.classList.remove('hidden');
+      if (direction >= 0) {
+        activeSlide.classList.add('slide-enter-right');
+      } else {
+        activeSlide.classList.add('slide-enter-left');
+      }
+
+      // Update header chapter title
+      document.getElementById('chapterTitle').textContent = titles[currentSlide];
+
+      // Update dots indicator
+      const dots = document.querySelectorAll('.step-dot');
+      dots.forEach((dot, idx) => {
+        if (idx === currentSlide) {
+          dot.classList.add('w-8', 'bg-amber-400');
+          dot.classList.remove('w-2.5', 'bg-amber-300/30');
+        } else {
+          dot.classList.remove('w-8', 'bg-amber-400');
+          dot.classList.add('w-2.5', 'bg-amber-300/30');
+        }
+      });
+
+      // Update Back Button Visibility
+      const prevBtn = document.getElementById('prevBtn');
+      if (currentSlide === 0) {
+        prevBtn.classList.add('opacity-0', 'pointer-events-none');
+      } else {
+        prevBtn.classList.remove('opacity-0', 'pointer-events-none');
+      }
+
+      // Update Next Button Label
+      document.getElementById('nextBtnText').textContent = nextButtonLabels[currentSlide];
+
+      // Play soft chime on transition
+      playChimeNote();
+
+      // Trigger celebration petal pop automatically on Slide 3
+      if (currentSlide === 2) {
+        triggerPetalsCelebration();
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) {
+        currentSlide++;
+        updateSlideUI(1);
+      } else {
+        // Final action: trigger festive celebration
+        triggerPetalsCelebration();
+        showToast("We eagerly look forward to your gracious presence!");
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlideUI(-1);
+      }
+    }
+
+    function goToSlide(index) {
+      if (index === currentSlide) return;
+      const direction = index > currentSlide ? 1 : -1;
+      currentSlide = index;
+      updateSlideUI(direction);
+    }
+
+    // Touch Swipe Detection for mobile cards
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const cardEl = document.querySelector('main');
+
+    cardEl.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    cardEl.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, { passive: true });
+
+    function handleSwipe() {
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 45) {
+        if (diff > 0) {
+          nextSlide(); // Swiped left -> Next
+        } else {
+          prevSlide(); // Swiped right -> Back
+        }
+      }
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'Space') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        prevSlide();
+      }
+    });
+
+    /* =====================================================================
+       2. AMBIENT SHEHNAI / TANPURA SYNTHESIZER (Web Audio API)
+       ===================================================================== */
+    let audioCtx = null;
+    let isPlaying = false;
+    let synthInterval = null;
+
+    function initAudio() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+      }
+    }
+
+    // Gentle pentatonic Indian classical raag notes (Raga Bhupali / Bilawal harmonics)
+    const scale = [220, 247.5, 277.18, 329.63, 369.99, 440, 495, 554.37];
+
+    function playNote(freq, duration = 1.6, gainLevel = 0.08) {
+      if (!audioCtx) return;
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        // Warm harmonic overtone (triangle + sine)
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+        // Shehnai-like vibrato
+        const vibrato = audioCtx.createOscillator();
+        const vibratoGain = audioCtx.createGain();
+        vibrato.frequency.setValueAtTime(5, audioCtx.currentTime);
+        vibratoGain.gain.setValueAtTime(2.5, audioCtx.currentTime);
+        vibrato.connect(osc.frequency);
+        vibrato.start();
+
+        gain.gain.setValueAtTime(0, audioCtx.currentTime);
+        gain.gain.linearRampToValueAtTime(gainLevel, audioCtx.currentTime + 0.3);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+        vibrato.stop(audioCtx.currentTime + duration);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    function playChimeNote() {
+      if (!isPlaying || !audioCtx) return;
+      const randomNote = scale[Math.floor(Math.random() * scale.length)];
+      playNote(randomNote * 1.5, 1.2, 0.05);
+    }
+
+    function toggleAudio() {
+      initAudio();
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+
+      const audioIcon = document.getElementById('audioIcon');
+      const audioLabel = document.getElementById('audioLabel');
+
+      if (!isPlaying) {
+        isPlaying = true;
+        audioLabel.textContent = "Music: On";
+        audioIcon.innerHTML = `
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072M18.364 5.636a9 9 0 010 12.728M12 5v14l-4.707-4.707H4a1 1 0 01-1-1v-4a1 1 0 011-1h3.293L12 5z" />
+        `;
+        showToast("Playing auspicious ambient notes 🎶");
+
+        // Ambient continuous sequence
+        let noteIndex = 0;
+        synthInterval = setInterval(() => {
+          if (!isPlaying) return;
+          const note = scale[noteIndex % scale.length];
+          playNote(note, 2.2, 0.04);
+          noteIndex = (noteIndex + Math.floor(Math.random() * 3) + 1);
+        }, 1800);
+      } else {
+        isPlaying = false;
+        clearInterval(synthInterval);
+        audioLabel.textContent = "Music: Off";
+        audioIcon.innerHTML = `
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/>
+        `;
+      }
+    }
+
+    document.getElementById('audioToggleBtn').addEventListener('click', toggleAudio);
+
+    /* =====================================================================
+       3. FLOATING MARIGOLD PETALS & GOLDEN PARTICLES (Canvas)
+       ===================================================================== */
+    const canvas = document.getElementById('petalsCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let particles = [];
+
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Petal {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * -height * 0.5;
+        this.size = Math.random() * 9 + 6;
+        this.speedY = Math.random() * 1.2 + 0.6;
+        this.speedX = Math.random() * 0.8 - 0.4;
+        this.angle = Math.random() * 360;
+        this.angularSpeed = (Math.random() - 0.5) * 1.5;
+        // Marigold orange, rich gold, ruby crimson
+        const colors = [
+          'rgba(255, 140, 0, 0.75)',   // Marigold
+          'rgba(245, 208, 97, 0.8)',   // Gold
+          'rgba(255, 182, 43, 0.75)',  // Warm yellow
+          'rgba(218, 60, 75, 0.55)'    // Rose petal
+        ];
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+      }
+      update() {
+        this.y += this.speedY;
+        this.x += Math.sin(this.angle * 0.02) * 0.6 + this.speedX;
+        this.angle += this.angularSpeed;
+
+        if (this.y > height + 20) {
+          this.reset();
+          this.y = -10;
+        }
+      }
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate((this.angle * Math.PI) / 180);
+        ctx.fillStyle = this.color;
+        // Petal shape
+        ctx.beginPath();
+        ctx.ellipse(0, 0, this.size, this.size * 0.5, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    // Initialize 28 serene floating petals
+    for (let i = 0; i < 28; i++) {
+      const p = new Petal();
+      p.y = Math.random() * height; // Spread across screen on load
+      particles.push(p);
+    }
+
+    function renderPetals() {
+      ctx.clearRect(0, 0, width, height);
+      for (const p of particles) {
+        p.update();
+        p.draw();
+      }
+      requestAnimationFrame(renderPetals);
+    }
+
+    window.onload = function() {
+      renderPetals();
+    };
+
+    /* =====================================================================
+       4. CELEBRATORY PETAL SHOWER & CONFETTI
+       ===================================================================== */
+    function triggerPetalsCelebration() {
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 50,
+          spread: 75,
+          origin: { y: 0.6 },
+          colors: ['#f5d061', '#ff8c00', '#ffd700', '#e53935', '#ffffff']
+        });
+      }
+    }
+
+    /* =====================================================================
+       5. INTERACTIVE CALENDAR GENERATOR (.ics & Google Calendar)
+       ===================================================================== */
+    document.getElementById('addToCalBtn').addEventListener('click', () => {
+      const title = encodeURIComponent("Arnav & Shaheli's Wedding Reception");
+      const details = encodeURIComponent("Wedding reception celebration of Arnav Chakraborty & Shaheli Mukherjee at Shiv Durga Garden, Michaelnagar.");
+      const location = encodeURIComponent("Shiv Durga Garden, Michaelnagar, Kolkata - 700133");
+      // 31 January 2027, 7:00 PM IST (UTC: 2027-01-31 13:30:00Z)
+      const startDate = "20270131T133000Z";
+      const endDate = "20270131T183000Z";
+
+      // Google Calendar Direct Link
+      const googleCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startDate}/${endDate}&details=${details}&location=${location}`;
+      
+      // Also provide fallback .ICS file download trigger
+      const icsContent = 
+`BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Arnav and Shaheli Wedding Reception//EN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+SUMMARY:Wedding Reception: Arnav & Shaheli
+DESCRIPTION:Celebration of Arnav Chakraborty and Shaheli Mukherjee at Shiv Durga Garden, Michaelnagar.
+LOCATION:Shiv Durga Garden, Michaelnagar, Kolkata - 700133
+DTSTART:20270131T133000Z
+DTEND:20270131T183000Z
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR`;
+
+      const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+      const downloadLink = document.createElement('a');
+      downloadLink.href = window.URL.createObjectURL(blob);
+      downloadLink.setAttribute('download', 'Arnav_Shaheli_Wedding_Reception.ics');
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+
+      // Open Google Calendar in parallel tab
+      window.open(googleCalUrl, '_blank');
+
+      showToast("📅 Reception added to calendar!");
+    });
+
+    /* =====================================================================
+       6. BLESSINGS & RSVP MODAL
+       ===================================================================== */
+    const blessingsModal = document.getElementById('blessingsModal');
+    document.getElementById('openBlessingsBtn').addEventListener('click', () => {
+      blessingsModal.classList.remove('hidden');
+    });
+
+    function closeBlessingsModal() {
+      blessingsModal.classList.add('hidden');
+    }
+
+    function sendBlessing() {
+      const name = document.getElementById('guestNameInput').value.trim();
+      const msg = document.getElementById('guestMessageInput').value.trim();
+      const feedback = document.getElementById('modalFeedback');
+
+      if (!name) {
+        feedback.textContent = "Please enter your name.";
+        feedback.classList.remove('hidden');
+        return;
+      }
+
+      feedback.textContent = `Thank you, ${name}! Your blessings have been received with love.`;
+      feedback.classList.remove('hidden');
+      triggerPetalsCelebration();
+
+      setTimeout(() => {
+        closeBlessingsModal();
+        feedback.classList.add('hidden');
+        document.getElementById('guestNameInput').value = '';
+        document.getElementById('guestMessageInput').value = '';
+        showToast(`Blessings recorded with gratitude! 🙏`);
+      }, 1600);
+    }
+
+    /* =====================================================================
+       7. TOAST NOTIFICATION HELPER & CUTOUT UPLOADER
+       ===================================================================== */
+    let toastTimeout;
+    function showToast(message) {
+      const toast = document.getElementById('toastMessage');
+      const toastText = document.getElementById('toastText');
+      toastText.textContent = message;
+      toast.classList.remove('opacity-0', 'pointer-events-none');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.add('opacity-0', 'pointer-events-none');
+      }, 3500);
+    }
+
+    // Photo Cutout File Loader (Local drag-and-drop or file pick)
+    const cutoutInput = document.getElementById('cutoutInput');
+    const customCouplePhoto = document.getElementById('customCouplePhoto');
+    const coupleVectorSvg = document.getElementById('coupleVectorSvg');
+
+    if (cutoutInput) {
+      cutoutInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(event) {
+            customCouplePhoto.src = event.target.result;
+            customCouplePhoto.classList.remove('hidden');
+            coupleVectorSvg.classList.add('hidden');
+            showToast("Couple portrait blended into royal frame! ✨");
+            triggerPetalsCelebration();
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+  </script>
+</body>
+</html>
